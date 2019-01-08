@@ -1,0 +1,72 @@
+version: '3.3'
+services:
+  php:
+    build: ./Docker/php
+    ports:
+      - "80:80"
+    links:
+      - mysql_powerbody
+      - mysql_pakerfit
+      - redis_powerbody
+      - redis_pakerfit
+    volumes:
+      - .:/var/www/html
+    container_name: powerbody_php
+    extra_hosts:
+      - "kamyk.co.uk.test beauty4you.co.uk.test powerbody.co.uk.test paker.co.uk.test powerbody.com.test m.powerbody.co.uk.test m.paker.co.uk.test m.powerbody.com.test powerbody.eu.test powerbody.de.test hurtownia.paker.co.uk.test olimp-supplements.co.uk.test warehouse.test olivit.co.uk.test olivit.de.test simplygym.test sllshop.powerbody.co.uk www.powerbody.co.uk.test www.kamyk.co.uk.test www.beauty4you.co.uk.test www.powerbody.co.uk.test www.paker.co.uk.test www.powerbody.com.test www.m.powerbody.co.uk.test www.m.paker.co.uk.test www.m.powerbody.com.test www.powerbody.eu.test www.powerbody.de.test www.hurtownia.paker.co.uk.test www.olimp-supplements.co.uk.test www.warehouse.test www.olivit.co.uk.test www.olivit.de.test www.simplygym.test www.sllshop.powerbody.co.uk www.www.powerbody.co.uk.test www.olivit.pl.test olivit.pl.test www.paker.fit.test paker.fit.test: 127.0.0.1"
+  mysql_powerbody:
+    image: mysql:5.6
+    restart: always
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./Docker/powerbody/mysql/:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: powerbody
+      MYSQL_USER: powerbody
+      MYSQL_PASSWORD: powerbody
+      MYSQL_DATABASE: powerbody
+    container_name: powerbody_mysql
+  mysql_pakerfit:
+    image: mysql:5.6
+    restart: always
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./Docker/pakerfit/mysql/:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pakerfit
+      MYSQL_USER: pakerfit
+      MYSQL_PASSWORD: pakerfit
+      MYSQL_DATABASE: pakerfit
+    container_name: pakerfit_mysql
+  redis_powerbody:
+    image: redis:5.0
+    container_name: powerbody_redis
+  redis_pakerfit:
+    image: redis:5.0
+    container_name: pakerfit_redis
+  phpmyadmin_powerbody:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      MYSQL_ROOT_PASSWORD: powerbody
+      PMA_HOST: powerbody_mysql
+      PMA_USER: powerbody
+      PMA_PASSWORD: powerbody
+    ports:
+      - "8080:80"
+    links:
+      - mysql_powerbody
+    container_name: powerbody_phpmyadmin
+  phpmyadmin_pakerfit:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      MYSQL_ROOT_PASSWORD: pakerfit
+      PMA_HOST: pakerfit_mysql
+      PMA_USER: pakerfit
+      PMA_PASSWORD: pakerfit
+    ports:
+      - "8081:80"
+    links:
+      - mysql_pakerfit
+    container_name: pakerfit_phpmyadmin
