@@ -1,4 +1,6 @@
-**/*
-trainning.conf
-
-trainning.conf
+/*
+/*/
+!/app/code/local/Powerbody/
+!Dockerfile
+!docker-compose.yml
+!trainning.conf
