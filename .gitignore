@@ -1,6 +1,5 @@
 /*
 /*/
-!/app/code/local/Powerbody/
 !Dockerfile
 !docker-compose.yml
-!trainning.conf
+!/app/code/local/Powerbody/
