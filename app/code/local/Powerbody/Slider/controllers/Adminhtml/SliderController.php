@@ -17,23 +17,22 @@ class Powerbody_Slider_Adminhtml_SliderController extends
 
     public function editAction()
     {
-        $id = $this->getRequest()->getParam('id', null);
-        $group = Mage::getModel('powerbody_slider/group');
-        if ($id) {
-            $group->load((int)$id);
-            if ($group->getId()) {
-                $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
-                if ($data) {
-                    $group->setData($data)->setId($id);
-                }
+        $groupId = $this->getRequest()->getParam('id');
+
+        if (null !== $groupId) {
+            $groupModel = Mage::getModel('powerbody_slider/group')->load($groupId);
+
+            if (null !== $groupModel->getId()) {
+                Mage::register('slider_group', $groupModel);
             } else {
-                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('awesome')->__('The Slider Group does not exist'));
-                $this->_redirect('*/*/');
+                $this->_getSession()->addError($this->__('Slider Group not found'));
+                $this->_redirect('*/*/index');
+
+                return;
             }
         }
-        Mage::register('slider_group', $group);
+
         $this->loadLayout();
-        $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
         $this->renderLayout();
     }
 

@@ -38,11 +38,11 @@ class Powerbody_Slider_Block_Adminhtml_Groups_Grid extends Mage_Adminhtml_Block_
         return parent::_prepareColumns();
     }
 
-//    public function getRowUrl($row)
-//    {
-//        return $this->getUrl('*/*/edit', array('id' => $row->getEntityId()));
-//    }
-//
+    public function getRowUrl($row)
+    {
+        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+    }
+
 //    protected function _prepareMassaction()
 //    {
 //        $this->setMassactionIdField('entity_id');
