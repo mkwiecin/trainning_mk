@@ -24,6 +24,11 @@
                 </entities>
             </powerbody_slider_mysql4>
         </models>
+        <blocks>
+            <powerbody_slider>
+                <class>Powerbody_Slider_Block</class>
+            </powerbody_slider>
+        </blocks>
         <helpers>
             <powerbody_slider>
                 <class>Powerbody_Slider_Helper</class>
@@ -52,4 +57,13 @@
             </adminhtml>
         </routers>
     </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <powerbody_slider module="powerbody_slider">
+                    <file>slider.xml</file>
+                </powerbody_slider>
+            </updates>
+        </layout>
+    </adminhtml>
 </config>

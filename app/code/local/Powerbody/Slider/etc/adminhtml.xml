@@ -10,7 +10,7 @@
                         <groups>
                             <title>Manage Groups</title>
                             <sort_order>0</sort_order>
-                            <!--<action>adminhtml/poll</action>-->
+                            <action>adminhtml/slider</action>
                         </groups>
                     </children>
                 </sliders>

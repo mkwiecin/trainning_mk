@@ -3,6 +3,11 @@
 class Powerbody_Slider_Adminhtml_SliderController extends
     Mage_Adminhtml_Controller_Action
 {
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('cms/sliders/groups');
+    }
+
     public function indexAction()
     {
         $this->loadLayout();
@@ -13,20 +18,20 @@ class Powerbody_Slider_Adminhtml_SliderController extends
     public function editAction()
     {
         $id = $this->getRequest()->getParam('id', null);
-        $registry = Mage::getModel('powerbody_slider/group');
+        $group = Mage::getModel('powerbody_slider/group');
         if ($id) {
-            $registry->load((int)$id);
-            if ($registry->getId()) {
+            $group->load((int)$id);
+            if ($group->getId()) {
                 $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
                 if ($data) {
-                    $registry->setData($data)->setId($id);
+                    $group->setData($data)->setId($id);
                 }
             } else {
                 Mage::getSingleton('adminhtml/session')->addError(Mage::helper('awesome')->__('The Slider Group does not exist'));
                 $this->_redirect('*/*/');
             }
         }
-        Mage::register('registry_data', $registry);
+        Mage::register('slider_group', $group);
         $this->loadLayout();
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
         $this->renderLayout();
@@ -40,17 +45,17 @@ class Powerbody_Slider_Adminhtml_SliderController extends
                 $id = $this->getRequest()->getParam('id');
 
                 if ($data && $id) {
-                    $registry = Mage::getModel('powerbody_slider/group')->load($id);
-                    $registry->setData($data);
-                    $registry->save();
+                    $group = Mage::getModel('powerbody_slider/group')->load($id);
+                    $group->setData($data);
+                    $group->save();
                     $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
                 }
             } catch (Exception $e) {
                 $this->_getSession()->addError(
-                    Mage::helper('powerbody_slider')->__('An error occurred while saving the registry data. Please review the log and try again.')
+                    Mage::helper('powerbody_slider')->__('An error occurred while saving the group data. Please review the log and try again.')
                 );
                 Mage::logException($e);
-                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('registry_id')));
+                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
                 return $this;
             }
         }
