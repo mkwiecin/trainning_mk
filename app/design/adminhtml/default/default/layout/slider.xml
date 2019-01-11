@@ -21,10 +21,4 @@
             <block type="powerbody_slider/adminhtml_groups" name="groups"/>
         </reference>
     </adminhtml_slider_index>
-
-    <!--<adminhtml_giftregistry_edit>-->
-        <!--<reference name="content">-->
-            <!--<block type="mdg_giftregistry/adminhtml_registries_edit" name="new_registry_tabs"/>-->
-        <!--</reference>-->
-    <!--</adminhtml_giftregistry_edit>-->
 </layout>

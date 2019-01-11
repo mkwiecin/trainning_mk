@@ -38,21 +38,4 @@ class Powerbody_Slider_Block_Adminhtml_Groups_Grid extends Mage_Adminhtml_Block_
         return parent::_prepareColumns();
     }
 
-//    public function getRowUrl($row)
-//    {
-//        return $this->getUrl('*/*/edit', array('id' => $row->getEntityId()));
-//    }
-//
-//    protected function _prepareMassaction()
-//    {
-//        $this->setMassactionIdField('entity_id');
-//        $this->getMassactionBlock()->setFormFieldName('registries');
-//        $this->getMassactionBlock()->addItem('delete', array(
-//            'label' => Mage::helper('mdg_giftregistry')->__('Usuń'),
-//            'url' => $this->getUrl('*/*/massDelete'),
-//            'confirm' => Mage::helper('mdg_giftregistry')->__('Czy na pewno?')
-//        ));
-//        return $this;
-//    }
-
 }
