@@ -14,12 +14,14 @@ class Powerbody_Slider_Block_Adminhtml_Groups_Edit_Form extends Mage_Adminhtml_B
 
         $form->setUseContainer(true);
         $this->setForm($form);
+
         if (Mage::getSingleton('adminhtml/session')->getFormData()) {
             $data = Mage::getSingleton('adminhtml/session')->getFormData();
             Mage::getSingleton('adminhtml/session')->setFormData(null);
         } elseif (Mage::registry('slider_group')) {
             $data = Mage::registry('slider_group')->getData();
         }
+
         $fieldset = $form->addFieldset('group_form',
             array('legend' => Mage::helper('powerbody_slider')->__('Slide Group information')));
         $fieldset->addField('name', 'text', array(
