@@ -10,4 +10,9 @@
             <block type="powerbody_slider/adminhtml_groups_edit" name="groups_edit"/>
         </reference>
     </adminhtml_slider_edit>
+    <adminhtml_item_index>
+        <reference name="content">
+            <block type="powerbody_slider/adminhtml_items" name="items"/>
+        </reference>
+    </adminhtml_item_index>
 </layout>
