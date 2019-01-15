@@ -44,7 +44,7 @@ $tableNameIt = $installer->getTable('powerbody_slider/item');
 if ($installer->getConnection()->isTableExists($tableNameIt) != true) {
     $table = $installer->getConnection()
         ->newTable($tableNameIt)
-        ->addColumn('Id', Varien_Db_Ddl_Table::TYPE_INTEGER, null,
+        ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null,
             array(
                 'unsigned' => true,
                 'nullable' => false,
