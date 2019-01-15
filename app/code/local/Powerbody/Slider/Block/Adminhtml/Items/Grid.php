@@ -25,10 +25,10 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
 
     protected function _prepareColumns()
     {
-        $this->addColumn('Id', array(
+        $this->addColumn('id', array(
             'header' => Mage::helper('powerbody_slider')->__('Id'),
             'width' => 50,
-            'index' => 'Id',
+            'index' => 'id',
             'sortable' => true,
         ));
         $this->addColumn('bg_image', array(
