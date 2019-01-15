@@ -19,6 +19,7 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
             'main_table.group_id = sg.id',
             ['sg.name as group_name']);
         $this->setCollection($collection);
+
         return parent::_prepareCollection();
     }
 
@@ -30,10 +31,12 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
             'index' => 'Id',
             'sortable' => true,
         ));
-        $this->addColumn('title', array(
+        $this->addColumn('bg_image', array(
             'header' => Mage::helper('powerbody_slider')->__('Image'),
-            'index' => 'title',
+            'index' => 'bg_image',
             'sortable' => true,
+            'type'      => 'image',
+            'renderer'  => 'powerbody_slider/adminhtml_items_renderer_image'
         ));
         $this->addColumn('group_name', array(
             'header' => Mage::helper('powerbody_slider')->__('Group'),

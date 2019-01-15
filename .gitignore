@@ -46,6 +46,7 @@ mysql/
 shell/
 skin/
 var/
+.htaccess
 LICENSE.html
 LICENSE.txt
 LICENSE_AFL.txt
