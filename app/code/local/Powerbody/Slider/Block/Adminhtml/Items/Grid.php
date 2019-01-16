@@ -8,7 +8,7 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
         $this->setId('itemsGrid');
         $this->setDefaultSort('event_date');
         $this->setDefaultDir('ASC');
-        $this->setSaveParametersInSession(true);
+        $this->setSaveParametersInSession(TRUE);
     }
 
     protected function _prepareCollection()
@@ -25,51 +25,51 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
 
     protected function _prepareColumns()
     {
-        $this->addColumn('id', array(
+        $this->addColumn('id', [
             'header' => Mage::helper('powerbody_slider')->__('Id'),
             'width' => 50,
             'index' => 'id',
-            'sortable' => true,
-        ));
-        $this->addColumn('bg_image', array(
+            'sortable' => TRUE,
+        ]);
+        $this->addColumn('bg_image', [
             'header' => Mage::helper('powerbody_slider')->__('Image'),
             'index' => 'bg_image',
-            'sortable' => true,
-            'type'      => 'image',
-            'renderer'  => 'powerbody_slider/adminhtml_items_renderer_image'
-        ));
-        $this->addColumn('group_name', array(
+            'sortable' => TRUE,
+            'type' => 'image',
+            'renderer' => 'powerbody_slider/adminhtml_items_renderer_image',
+        ]);
+        $this->addColumn('group_name', [
             'header' => Mage::helper('powerbody_slider')->__('Group'),
             'index' => 'group_name',
-            'sortable' => true,
-        ));
-        $this->addColumn('status', array(
+            'sortable' => TRUE,
+        ]);
+        $this->addColumn('status', [
             'header' => Mage::helper('powerbody_slider')->__('Status'),
             'index' => 'status',
-            'sortable' => true,
-        ));
-        $this->addColumn('display_from', array(
+            'sortable' => TRUE,
+        ]);
+        $this->addColumn('display_from', [
             'header' => Mage::helper('powerbody_slider')->__('Display From'),
             'index' => 'display_from',
-            'sortable' => true,
-        ));
-        $this->addColumn('display_To', array(
+            'sortable' => TRUE,
+        ]);
+        $this->addColumn('display_To', [
             'header' => Mage::helper('powerbody_slider')->__('Display To'),
             'index' => 'display_to',
-            'sortable' => true,
-        ));
-        $this->addColumn('sort_order', array(
+            'sortable' => TRUE,
+        ]);
+        $this->addColumn('sort_order', [
             'header' => Mage::helper('powerbody_slider')->__('Sort Order'),
             'index' => 'sort_order',
-            'sortable' => true,
-        ));
+            'sortable' => TRUE,
+        ]);
 
         return parent::_prepareColumns();
     }
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+        return $this->getUrl('*/*/edit', ['id' => $row->getId()]);
     }
 
 }

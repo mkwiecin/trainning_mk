@@ -5,73 +5,71 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit_Form extends Mage_Adminhtml_Bl
 {
     protected function _prepareForm()
     {
-        $form = new Varien_Data_Form(array(
+        $form = new Varien_Data_Form([
             'id' => 'edit_form',
-            'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'))),
+            'action' => $this->getUrl('*/*/save', ['id' => $this->getRequest()->getParam('id')]),
             'method' => 'post',
-            'enctype' => 'multipart/form-data'
-        ));
+            'enctype' => 'multipart/form-data',
+        ]);
 
-        $form->setUseContainer(true);
+        $form->setUseContainer(TRUE);
         $this->setForm($form);
 
         if (Mage::getSingleton('adminhtml/session')->getFormData()) {
             $data = Mage::getSingleton('adminhtml/session')->getFormData();
-            Mage::getSingleton('adminhtml/session')->setFormData(null);
+            Mage::getSingleton('adminhtml/session')->setFormData(NULL);
         } elseif (Mage::registry('slider_item')) {
             $data = Mage::registry('slider_item')->getData();
+            $data['bg_image'] = 'slider/' . $data['bg_image'];
         }
 
         $fieldset = $form->addFieldset('item_form',
-            array('legend' => Mage::helper('powerbody_slider')->__('Slide Item information')));
-        $fieldset->addField('title', 'text', array(
+            ['legend' => Mage::helper('powerbody_slider')->__('Slide Item information')]);
+        $fieldset->addField('title', 'text', [
             'label' => Mage::helper('powerbody_slider')->__('Title'),
             'class' => 'required-entry',
-            'required' => true,
+            'required' => TRUE,
             'name' => 'title',
-        ));
-        $fieldset->addField('link_url', 'text', array(
+        ]);
+        $fieldset->addField('link_url', 'text', [
             'label' => Mage::helper('powerbody_slider')->__('Link url'),
-            'required' => false,
+            'required' => FALSE,
             'name' => 'link_url',
-        ));
-        $fieldset->addField('bg_image', 'file', array(
+        ]);
+        $fieldset->addField('bg_image', 'image', [
             'label' => Mage::helper('powerbody_slider')->__('Add New Image'),
-            'required' => false,
+            'required' => FALSE,
             'name' => 'bg_image',
-            'default_value' => 'yttytyy',
-            'class' => 'input-file',
-            'after_element_html' => $this->_addAfterElementHtml()
-        ));
-        $fieldset->addField('group_id', 'select', array(
+        ]);
+        $fieldset->addField('group_id', 'select', [
             'label' => Mage::helper('powerbody_slider')->__('Slides Group'),
-            'required' => true,
+            'required' => TRUE,
             'name' => 'group_id',
-            'values' => $this->getSelectOptions()
-        ));
-        $fieldset->addField('status', 'text', array(
+            'values' => $this->getSelectOptions(),
+        ]);
+        $fieldset->addField('status', 'text', [
             'label' => Mage::helper('powerbody_slider')->__('Status'),
-            'required' => false,
+            'required' => FALSE,
             'name' => 'status',
-        ));
-        $fieldset->addField('display_from', 'date', array(
+        ]);
+        $fieldset->addField('display_from', 'date', [
             'format' => Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
             'label' => Mage::helper('powerbody_slider')->__('Display From'),
-            'required' => false,
+            'required' => FALSE,
             'name' => 'display_from',
-        ));
-        $fieldset->addField('display_to', 'date', array(
+        ]);
+        $fieldset->addField('display_to', 'date', [
             'format' => Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
             'label' => Mage::helper('powerbody_slider')->__('Display To'),
-            'required' => false,
+            'required' => FALSE,
             'name' => 'display_to',
-        ));
-        $fieldset->addField('sort_order', 'text', array(
+        ]);
+        $fieldset->addField('sort_order', 'text', [
             'label' => Mage::helper('powerbody_slider')->__('Sort Order'),
             'class' => 'required-entry',
-            'required' => true,
+            'required' => TRUE,
             'name' => 'sort_order',
-        ));
+        ]);
 
         $form->setValues($data);
 
@@ -80,7 +78,7 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit_Form extends Mage_Adminhtml_Bl
 
     private function getSelectOptions(): array
     {
-        $selectOptions = ['-1' => 'Please Select...',];
+        $selectOptions = ['-1' => 'You can make choice...',];
         $collection = Mage::getModel('powerbody_slider/group')->getCollection();
         foreach ($collection as $model) {
             $id = $model->getData('id');
@@ -91,19 +89,4 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit_Form extends Mage_Adminhtml_Bl
         return $selectOptions;
     }
 
-    protected function _addAfterElementHtml()
-    {
-        $itemModel = Mage::registry('slider_item');
-        if (null !== $itemModel && false === empty($itemModel->getData('bg_image'))) {
-//             Mage::log(Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)
-//                 . 'slider/'
-//                 . $itemModel->getData('bg_image'));
-                 return $this->getLayout()->createBlock('powerbody_slider/adminhtml_items_renderer_image')
-                ->setTemplate('slider/adminhtml/item/grid/renderer/image.phtml')
-                ->setData('bg_image', Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)
-                    . 'slider/'
-                    . $itemModel->getData('bg_image'))->toHtml();
-        }
-        return '';
-    }
 }

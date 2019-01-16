@@ -16,8 +16,7 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit extends Mage_Adminhtml_Block_W
 
     public function getHeaderText()
     {
-        if (Mage::registry('slider_item') && Mage::registry('slider_item')->getId())
-        {
+        if (Mage::registry('slider_item') && Mage::registry('slider_item')->getId()) {
             return Mage::helper('powerbody_slider')
                 ->__("Edit Slide Item '%s'",
                     $this->htmlEscape(Mage::registry('slider_item')->getName()));
