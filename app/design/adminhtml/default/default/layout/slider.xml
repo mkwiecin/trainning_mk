@@ -15,4 +15,9 @@
             <block type="powerbody_slider/adminhtml_items" name="items"/>
         </reference>
     </adminhtml_item_index>
+    <adminhtml_item_edit>
+        <reference name="content">
+            <block type="powerbody_slider/adminhtml_items_edit" name="items_edit"/>
+        </reference>
+    </adminhtml_item_edit>
 </layout>
