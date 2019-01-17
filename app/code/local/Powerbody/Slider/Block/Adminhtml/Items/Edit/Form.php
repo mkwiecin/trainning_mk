@@ -3,6 +3,8 @@
 
 class Powerbody_Slider_Block_Adminhtml_Items_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
+    const DATE_FORMAT = 'yyyy-MM-dd';
+
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form([
@@ -53,16 +55,18 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit_Form extends Mage_Adminhtml_Bl
             'name' => 'status',
         ]);
         $fieldset->addField('display_from', 'date', [
-            'format' => Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
+            'format'    => self::DATE_FORMAT,
             'label' => Mage::helper('powerbody_slider')->__('Display From'),
             'required' => FALSE,
             'name' => 'display_from',
+            'image'     => $this->getSkinUrl('images/grid-cal.gif'),
         ]);
         $fieldset->addField('display_to', 'date', [
-            'format' => Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
+            'format'    => self::DATE_FORMAT,
             'label' => Mage::helper('powerbody_slider')->__('Display To'),
             'required' => FALSE,
             'name' => 'display_to',
+            'image'     => $this->getSkinUrl('images/grid-cal.gif'),
         ]);
         $fieldset->addField('sort_order', 'text', [
             'label' => Mage::helper('powerbody_slider')->__('Sort Order'),

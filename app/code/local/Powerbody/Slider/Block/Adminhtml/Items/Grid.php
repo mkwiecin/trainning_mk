@@ -2,6 +2,8 @@
 
 class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
+    const DATE_FORMAT = 'yyyy/MM/dd';
+
     public function __construct()
     {
         parent::__construct();
@@ -32,11 +34,13 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
             'sortable' => TRUE,
         ]);
         $this->addColumn('bg_image', [
+            'align' => 'center',
             'header' => Mage::helper('powerbody_slider')->__('Image'),
             'index' => 'bg_image',
             'sortable' => TRUE,
             'type' => 'image',
             'renderer' => 'powerbody_slider/adminhtml_items_renderer_image',
+            'width' => '110px',
         ]);
         $this->addColumn('group_name', [
             'header' => Mage::helper('powerbody_slider')->__('Group'),
@@ -49,14 +53,20 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
             'sortable' => TRUE,
         ]);
         $this->addColumn('display_from', [
+            'align'     => 'center',
             'header' => Mage::helper('powerbody_slider')->__('Display From'),
             'index' => 'display_from',
             'sortable' => TRUE,
+            'type'      => 'date',
+            'format'    => self::DATE_FORMAT,
         ]);
         $this->addColumn('display_To', [
+            'align'     => 'center',
             'header' => Mage::helper('powerbody_slider')->__('Display To'),
             'index' => 'display_to',
             'sortable' => TRUE,
+            'type'      => 'date',
+            'format'    => self::DATE_FORMAT,
         ]);
         $this->addColumn('sort_order', [
             'header' => Mage::helper('powerbody_slider')->__('Sort Order'),
@@ -67,7 +77,7 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
         return parent::_prepareColumns();
     }
 
-    public function getRowUrl($row)
+    public function getRowUrl($row) : string
     {
         return $this->getUrl('*/*/edit', ['id' => $row->getId()]);
     }
