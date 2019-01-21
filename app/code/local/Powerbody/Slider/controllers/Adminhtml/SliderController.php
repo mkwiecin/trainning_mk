@@ -44,7 +44,7 @@ class Powerbody_Slider_Adminhtml_SliderController extends
             }
         }
         // 3. Set entered data if was error when we do save
-        $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
+        $data = Mage::getSingleton('adminhtml/session')->getFormData(TRUE);
         if (!empty($data)) {
             $model->setData($data);
         }
@@ -82,11 +82,11 @@ class Powerbody_Slider_Adminhtml_SliderController extends
                 // display success message
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('powerbody_slider')->__('The Slides Group has been saved.'));
                 // clear previously saved data from session
-                Mage::getSingleton('adminhtml/session')->setFormData(false);
+                Mage::getSingleton('adminhtml/session')->setFormData(FALSE);
 
                 // check if 'Save and Continue'
                 if ($this->getRequest()->getParam('back')) {
-                    $this->_redirect('*/*/edit', array('id' => $model->getId()));
+                    $this->_redirect('*/*/edit', ['id' => $model->getId()]);
 
                     return;
                 }
@@ -100,7 +100,7 @@ class Powerbody_Slider_Adminhtml_SliderController extends
                 // save data in session
                 Mage::getSingleton('adminhtml/session')->setFormData($data);
                 // redirect to edit form
-                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+                $this->_redirect('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
 
                 return;
             }
@@ -130,7 +130,7 @@ class Powerbody_Slider_Adminhtml_SliderController extends
                 // display error message
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
                 // go back to edit form
-                $this->_redirect('*/*/edit', array('id' => $id));
+                $this->_redirect('*/*/edit', ['id' => $id]);
                 return;
             }
         }

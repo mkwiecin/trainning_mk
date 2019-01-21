@@ -46,6 +46,15 @@
             </connection>
         </resources>
     </global>
+    <frontend>
+        <layout>
+            <updates>
+                <powerbody_slider module="powerbody_slider">
+                    <file>slider.xml</file>
+                </powerbody_slider>
+            </updates>
+        </layout>
+    </frontend>
     <admin>
         <routers>
             <adminhtml>
