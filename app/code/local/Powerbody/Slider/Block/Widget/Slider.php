@@ -13,33 +13,32 @@ class Powerbody_Slider_Block_Widget_Slider extends Mage_Core_Block_Abstract impl
         if (isset($groupId)) {
             $itemsCollection = Mage::getModel('powerbody_slider/item')->getCollection();
             $itemsCollection->addFieldToFilter('group_id', ['eq' => $groupId]);
-            $itemsCollection->addFieldToFilter('display_from', ['lt' => Mage::getModel('core/date')->date('Y-m-d')]);
-            $itemsCollection->addFieldToFilter('display_To', ['gt' => Mage::getModel('core/date')->date('Y-m-d')]);
+            $itemsCollection->addFieldToFilter('display_from', ['lteq' => Mage::getModel('core/date')->date('Y-m-d')]);
+            $itemsCollection->addFieldToFilter('display_To', ['gteq' => Mage::getModel('core/date')->date('Y-m-d')]);
             $itemsCollection->setOrder('sort_order', 'asc');
         }
         $bgImages = $itemsCollection->getColumnValues('bg_image');
-
-        return $this->slideShowRawCode($bgImages);
+//var_dump($bgImages);
+        return $this->slideShow($bgImages);
     }
 
-    private function slideShowRawCode(array $bgImages)
+    private function slideShow(array $bgImages) : string
     {
         $imgDiv = '';
         $dotSpan = '';
         for ($i = 0; $i < count($bgImages); $i++) {
-            $imgDiv .=
-            "<div class=\"mySlides fade\">
+            $imgDiv .="
+            <div class=\"mySlides fade\">
                 <div class=\"numbertext\"></div>
                 <img src=\"media/slider/" . $bgImages[$i] . "\" style=\"width:100%\">
                 <div class=\"text\"></div>
-            </div>";
+            </div>
+            ";
 
             $dotSpan .= "<span class=\"dot\"></span> ";
         }
 
         $html = "
-         <!DOCTYPE html>
-<html>
 <head>
 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
 <style>
@@ -177,8 +176,7 @@ function showSlides() {
 </script>
 
 </body>
-</html>
-         ";
+";
 
         return $html;
     }
