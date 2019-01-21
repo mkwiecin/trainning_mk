@@ -45,6 +45,7 @@ media/
 mysql/
 shell/
 skin/adminhtml/
+skin/frontend/base
 skin/frontend/default/blank/
 skin/frontend/default/blue/
 skin/frontend/default/default/css/oauth-simple.css
