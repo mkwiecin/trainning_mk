@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Powerbody_Slider>
+            <version>0.1.0</version>
+        </Powerbody_Slider>
+    </modules>
+    <global>
+        <models>
+            <powerbody_slider>
+                <class>Powerbody_Slider_Model</class>
+                <resourceModel>powerbody_slider_mysql4</resourceModel>
+            </powerbody_slider>
+            <powerbody_slider_mysql4>
+                <class>Powerbody_Slider_Model_Mysql4</class>
+                <entities>
+                    <group>
+                        <table>slider_group</table>
+                    </group>
+                    <item>
+                        <table>slider_item</table>
+                    </item>
+                </entities>
+            </powerbody_slider_mysql4>
+        </models>
+        <resources>
+            <powerbody_slider_setup>
+                <setup>
+                    <module>Powerbody_Slider</module>
+                    <class>Powerbody_Slider_Model_Resource_Setup</class>
+                </setup>
+            </powerbody_slider_setup>
+            <connection>
+                <use>core_setup</use>
+            </connection>
+        </resources>
+    </global>
+</config>
