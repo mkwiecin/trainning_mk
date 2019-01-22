@@ -28,14 +28,14 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
     protected function _prepareColumns()
     {
         $this->addColumn('id', [
-            'header' => Mage::helper('powerbody_slider')->__('Id'),
+            'header' => $this->__('Id'),
             'width' => 50,
             'index' => 'id',
             'sortable' => TRUE,
         ]);
         $this->addColumn('bg_image', [
             'align' => 'center',
-            'header' => Mage::helper('powerbody_slider')->__('Image'),
+            'header' => $this->__('Image'),
             'index' => 'bg_image',
             'sortable' => TRUE,
             'type' => 'image',
@@ -43,18 +43,18 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
             'width' => '110px',
         ]);
         $this->addColumn('group_name', [
-            'header' => Mage::helper('powerbody_slider')->__('Group'),
+            'header' => $this->__('Group'),
             'index' => 'group_name',
             'sortable' => TRUE,
         ]);
         $this->addColumn('status', [
-            'header' => Mage::helper('powerbody_slider')->__('Status'),
+            'header' => $this->__('Status'),
             'index' => 'status',
             'sortable' => TRUE,
         ]);
         $this->addColumn('display_from', [
             'align'     => 'center',
-            'header' => Mage::helper('powerbody_slider')->__('Display From'),
+            'header' => $this->__('Display From'),
             'index' => 'display_from',
             'sortable' => TRUE,
             'type'      => 'date',
@@ -62,14 +62,14 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
         ]);
         $this->addColumn('display_To', [
             'align'     => 'center',
-            'header' => Mage::helper('powerbody_slider')->__('Display To'),
+            'header' => $this->__('Display To'),
             'index' => 'display_to',
             'sortable' => TRUE,
             'type'      => 'date',
             'format'    => self::DATE_FORMAT,
         ]);
         $this->addColumn('sort_order', [
-            'header' => Mage::helper('powerbody_slider')->__('Sort Order'),
+            'header' => $this->__('Sort Order'),
             'index' => 'sort_order',
             'sortable' => TRUE,
         ]);

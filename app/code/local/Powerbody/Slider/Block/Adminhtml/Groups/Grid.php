@@ -22,15 +22,13 @@ class Powerbody_Slider_Block_Adminhtml_Groups_Grid extends Mage_Adminhtml_Block_
     protected function _prepareColumns()
     {
         $this->addColumn('id', array(
-            'header' => Mage::helper
-            ('powerbody_slider')->__('Id'),
+            'header' => $this->__('Id'),
             'width' => 50,
             'index' => 'id',
             'sortable' => false,
         ));
         $this->addColumn('name', array(
-            'header' => Mage::helper
-            ('powerbody_slider')->__('Name'),
+            'header' => $this->__('Name'),
             'index' => 'name',
             'sortable' => false,
         ));

@@ -36,7 +36,7 @@ class Powerbody_Slider_Adminhtml_ItemController extends
         if ($itemId) {
             $model = Mage::getModel('powerbody_slider/item')->load($itemId);
             if (!$model->getId()) {
-                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('powerbody_slider')->__('This Slides Item no longer exists.'));
+                Mage::getSingleton('adminhtml/session')->addError($this->__('This Slides Item no longer exists.'));
                 $this->_redirect('*/*/');
 
                 return;
@@ -78,7 +78,7 @@ class Powerbody_Slider_Adminhtml_ItemController extends
                 $model->load($id);
                 $model->delete();
                 // display success message
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('powerbody_slider')->__("The Slide Item has been deleted."));
+                Mage::getSingleton('adminhtml/session')->addSuccess($this->__("The Slide Item has been deleted."));
                 // go to grid
                 $this->_redirect('*/*/');
 
@@ -93,7 +93,7 @@ class Powerbody_Slider_Adminhtml_ItemController extends
             }
         }
         // display error message
-        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('powerbody_slider')->__('Unable to find a Slide Item to delete.'));
+        Mage::getSingleton('adminhtml/session')->addError($this->__('Unable to find a Slide Item to delete.'));
         // go to grid
         $this->_redirect('*/*/');
     }

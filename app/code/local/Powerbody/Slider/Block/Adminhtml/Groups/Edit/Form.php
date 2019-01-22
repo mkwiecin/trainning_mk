@@ -23,9 +23,9 @@ class Powerbody_Slider_Block_Adminhtml_Groups_Edit_Form extends Mage_Adminhtml_B
         }
 
         $fieldset = $form->addFieldset('group_form',
-            array('legend' => Mage::helper('powerbody_slider')->__('Slide Group information')));
+            array('legend' => $this->__('Slide Group information')));
         $fieldset->addField('name', 'text', array(
-            'label' => Mage::helper('powerbody_slider')->__('Name'),
+            'label' => $this->__('Name'),
             'class' => 'required-entry',
             'required' => true,
             'name' => 'name',

@@ -11,17 +11,17 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit extends Mage_Adminhtml_Block_W
         $this->_updateButton('save', 'label', Mage::helper
         ('powerbody_slider')->__('Save slide item'));
         $this->_updateButton('delete', 'label',
-            Mage::helper('powerbody_slider')->__('Delete slide item'));
+            $this->__('Delete slide item'));
     }
 
     public function getHeaderText()
     {
         if (Mage::registry('slider_item') && Mage::registry('slider_item')->getId()) {
-            return Mage::helper('powerbody_slider')
-                ->__("Edit Slide Item '%s'",
+            return $this
+                ->__("Edit Slide Item",
                     $this->htmlEscape(Mage::registry('slider_item')->getName()));
         }
 
-        return Mage::helper('powerbody_slider')->__('Add slide item');
+        return $this->__('Add slide item');
     }
 }

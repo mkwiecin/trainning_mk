@@ -37,7 +37,7 @@ class Powerbody_Slider_Adminhtml_SliderController extends
         if ($id) {
             $model->load($id);
             if (!$model->getId()) {
-                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('powerbody_slider')->__('This Slides Group no longer exists.'));
+                Mage::getSingleton('adminhtml/session')->addError($this->__('This Slides Group no longer exists.'));
                 $this->_redirect('*/*/');
 
                 return;
@@ -67,7 +67,7 @@ class Powerbody_Slider_Adminhtml_SliderController extends
             $model = Mage::getModel('powerbody_slider/group')->load($id);
 
             if (!$model->getId() && $id) {
-                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('powerbody_slider')->__('This Slides Group no longer exists.'));
+                Mage::getSingleton('adminhtml/session')->addError($this->__('This Slides Group no longer exists.'));
                 $this->_redirect('*/*/');
 
                 return;
@@ -80,7 +80,7 @@ class Powerbody_Slider_Adminhtml_SliderController extends
                 // save the data
                 $model->save();
                 // display success message
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('powerbody_slider')->__('The Slides Group has been saved.'));
+                Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The Slides Group has been saved.'));
                 // clear previously saved data from session
                 Mage::getSingleton('adminhtml/session')->setFormData(FALSE);
 
@@ -120,7 +120,7 @@ class Powerbody_Slider_Adminhtml_SliderController extends
                 $name = $model->getName();
                 $model->delete();
                 // display success message
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('powerbody_slider')->__("The Slides Group $name has been deleted."));
+                Mage::getSingleton('adminhtml/session')->addSuccess($this->__("The Slides Group '%s' has been deleted.", $name));
                 // go to grid
                 $this->_redirect('*/*/');
 
@@ -135,7 +135,7 @@ class Powerbody_Slider_Adminhtml_SliderController extends
             }
         }
         // display error message
-        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('powerbody_slider')->__('Unable to find a Slides Group to delete.'));
+        Mage::getSingleton('adminhtml/session')->addError($this->__('Unable to find a Slides Group to delete.'));
         // go to grid
         $this->_redirect('*/*/');
     }

@@ -26,50 +26,50 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit_Form extends Mage_Adminhtml_Bl
         }
 
         $fieldset = $form->addFieldset('item_form',
-            ['legend' => Mage::helper('powerbody_slider')->__('Slide Item information')]);
+            ['legend' => $this->__('Slide Item information')]);
         $fieldset->addField('title', 'text', [
-            'label' => Mage::helper('powerbody_slider')->__('Title'),
+            'label' => $this->__('Title'),
             'class' => 'required-entry',
             'required' => TRUE,
             'name' => 'title',
         ]);
         $fieldset->addField('link_url', 'text', [
-            'label' => Mage::helper('powerbody_slider')->__('Link url'),
+            'label' => $this->__('Link url'),
             'required' => FALSE,
             'name' => 'link_url',
         ]);
         $fieldset->addField('bg_image', 'image', [
-            'label' => Mage::helper('powerbody_slider')->__('Add New Image'),
+            'label' => $this->__('Add New Image'),
             'required' => FALSE,
             'name' => 'bg_image',
         ]);
         $fieldset->addField('group_id', 'select', [
-            'label' => Mage::helper('powerbody_slider')->__('Slides Group'),
+            'label' => $this->__('Slides Group'),
             'required' => TRUE,
             'name' => 'group_id',
             'values' => $this->getSelectOptions(),
         ]);
         $fieldset->addField('status', 'text', [
-            'label' => Mage::helper('powerbody_slider')->__('Status'),
+            'label' => $this->__('Status'),
             'required' => FALSE,
             'name' => 'status',
         ]);
         $fieldset->addField('display_from', 'date', [
             'format'    => self::DATE_FORMAT,
-            'label' => Mage::helper('powerbody_slider')->__('Display From'),
+            'label' => $this->__('Display From'),
             'required' => FALSE,
             'name' => 'display_from',
             'image'     => $this->getSkinUrl('images/grid-cal.gif'),
         ]);
         $fieldset->addField('display_to', 'date', [
             'format'    => self::DATE_FORMAT,
-            'label' => Mage::helper('powerbody_slider')->__('Display To'),
+            'label' => $this->__('Display To'),
             'required' => FALSE,
             'name' => 'display_to',
             'image'     => $this->getSkinUrl('images/grid-cal.gif'),
         ]);
         $fieldset->addField('sort_order', 'text', [
-            'label' => Mage::helper('powerbody_slider')->__('Sort Order'),
+            'label' => $this->__('Sort Order'),
             'class' => 'required-entry',
             'required' => TRUE,
             'name' => 'sort_order',
@@ -82,7 +82,7 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit_Form extends Mage_Adminhtml_Bl
 
     private function getSelectOptions(): array
     {
-        $selectOptions = ['-1' => 'You can make choice...',];
+        $selectOptions = ['-1' => $this->__('You can make choice...'),];
         $collection = Mage::getModel('powerbody_slider/group')->getCollection();
         foreach ($collection as $model) {
             $id = $model->getData('id');

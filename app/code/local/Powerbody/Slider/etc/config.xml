@@ -56,15 +56,17 @@
         </layout>
     </frontend>
     <admin>
-        <routers>
-            <adminhtml>
-                <args>
-                    <modules>
-                        <powerbody_slider before="Mage_Adminhtml">Powerbody_Slider_Adminhtml</powerbody_slider>
-                    </modules>
-                </args>
-            </adminhtml>
-        </routers>
+        <!--<translate>-->
+            <routers>
+                <adminhtml>
+                    <args>
+                        <modules>
+                            <powerbody_slider before="Mage_Adminhtml">Powerbody_Slider_Adminhtml</powerbody_slider>
+                        </modules>
+                    </args>
+                </adminhtml>
+            </routers>
+        <!--</translate>-->
     </admin>
     <adminhtml>
         <layout>
@@ -74,5 +76,14 @@
                 </powerbody_slider>
             </updates>
         </layout>
+        <translate>
+            <modules>
+                <slider>
+                    <files>
+                        <default>Powerbody_Slider.csv</default>
+                    </files>
+                </slider>
+            </modules>
+        </translate>
     </adminhtml>
 </config>

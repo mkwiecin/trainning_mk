@@ -21,10 +21,10 @@ class Powerbody_Slider_Model_Service_Uploader
             }
             $itemModel->addData($data);
             $itemModel->save();
-            $success = Mage::helper('powerbody_slider')->__('Slide Item was successfully saved.');
+            $success = $this->__('Slide Item was successfully saved.');
             $this->_getSession()->addSuccess($success);
         } catch (Exception $e) {
-            $error = Mage::helper('powerbody_slider')->__('Error occurred during data saving.');
+            $error = $this->__('Error occurred during data saving.');
             $this->_getSession()->addError($error);
             Mage::logException($e);
         }
