@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_slider_index>
+        <reference name="content">
+            <block type="powerbody_slider/adminhtml_groups" name="groups"/>
+        </reference>
+    </adminhtml_slider_index>
+    <adminhtml_slider_edit>
+        <reference name="content">
+            <block type="powerbody_slider/adminhtml_groups_edit" name="groups_edit"/>
+        </reference>
+    </adminhtml_slider_edit>
+</layout>
