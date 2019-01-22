@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Powerbody_Slider>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Powerbody_Slider>
+    </modules>
+</config>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+    <widget_slider type="powerbody_slider/widget_slider">
+        <name>Slider</name>
+        <description type="desc">Display sliders</description>
+        <parameters>
+            <slider_list translate="label">
+                <visible>1</visible>
+                <label>Choose slider group to display</label>
+                <type>select</type>
+                <source_model>powerbody_slider/group</source_model>
+            </slider_list>
+        </parameters>
+    </widget_slider>
+</widgets>
