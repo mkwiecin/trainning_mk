@@ -13,6 +13,11 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
         $this->setSaveParametersInSession(TRUE);
     }
 
+	public function getRowUrl($row) : string
+	{
+		return $this->getUrl('*/*/edit', ['id' => $row->getId()]);
+	}
+
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('powerbody_slider/item')->getCollection();
@@ -76,10 +81,4 @@ class Powerbody_Slider_Block_Adminhtml_Items_Grid extends Mage_Adminhtml_Block_W
 
         return parent::_prepareColumns();
     }
-
-    public function getRowUrl($row) : string
-    {
-        return $this->getUrl('*/*/edit', ['id' => $row->getId()]);
-    }
-
 }

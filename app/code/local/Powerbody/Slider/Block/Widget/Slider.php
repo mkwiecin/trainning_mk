@@ -4,9 +4,7 @@ class Powerbody_Slider_Block_Widget_Slider extends Mage_Core_Block_Template impl
 {
     protected function _construct()
     {
-
         parent::_construct();
-
         $this->setTemplate('slider/widget/slider.phtml');
     }
 
@@ -24,5 +22,4 @@ class Powerbody_Slider_Block_Widget_Slider extends Mage_Core_Block_Template impl
 
         return $bgImages;
     }
-
 }
