@@ -1,9 +1,7 @@
 <?php
 
-
 class Powerbody_Slider_Block_Adminhtml_Groups extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
-
     public function __construct()
     {
         $this->_controller = 'adminhtml_groups';
@@ -12,5 +10,4 @@ class Powerbody_Slider_Block_Adminhtml_Groups extends Mage_Adminhtml_Block_Widge
         $this->_addButtonLabel = $this->__('Add New Slide Group');
         parent::__construct();
     }
-
 }

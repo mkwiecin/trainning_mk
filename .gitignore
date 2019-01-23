@@ -7,7 +7,13 @@ app/code/community/Phoenix/
 app/code/core/
 app/code/locale/
 app/design/
+app/design/frontend/
+app/design/frontend/base/
+app/design/frontend/base/default/
+app/design/frontend/base/default/layout/
 !app/design/frontend/base/default/layout/slider.xml
+app/design/frontend/base/default/template/
+!app/design/frontend/base/default/template/slider/widget/slider.phtml
 app/etc/local.xml
 app/etc/enterprise.xml
 app/etc/local.xml.additional
@@ -47,11 +53,10 @@ media/
 mysql/
 shell/
 skin/adminhtml/
-skin/frontend/base
+skin/frontend/base/
+skin/frontend/base/default/
+skin/frontend/base/default/css/
 !skin/frontend/base/default/css/slider/slider.css
-skin/frontend/base/default/css/email-inline.css
-skin/frontend/base/default/css/email-non-inline.css
-skin/frontend/base/default/css/widget.css
 skin/frontend/base/default/images/
 skin/frontend/base/default/js/
 skin/frontend/base/default/lib/
@@ -76,8 +81,3 @@ index.php.sample
 install.php
 mage
 php.ini.sample
-
-
-
-
-
