@@ -7,5 +7,4 @@ class Powerbody_Slider_Model_Mysql4_Item_Collection extends Mage_Core_Model_Mysq
         $this->_init('powerbody_slider/item');
         parent::_construct();
     }
-
 }
