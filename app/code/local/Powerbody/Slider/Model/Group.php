@@ -10,11 +10,10 @@ class Powerbody_Slider_Model_Group extends Mage_Core_Model_Abstract
 
 	public function toOptionArray(): array
 	{
+		/* @var Powerbody_Slider_Model_Mysql4_Group_Collection $groupCollection */
 		$groupCollection = Mage::getModel('powerbody_slider/group')->getCollection();
-		if (true === empty($groupCollection)) {
 
-			return $selectOptions = [];
-		}
+		$selectOptions = [];
 		foreach ($groupCollection as $groupModel) {
 			$selectOptions[] = [
 				'label' => $groupModel->getData('name'),

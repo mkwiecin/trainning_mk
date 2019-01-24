@@ -16,12 +16,17 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit_Form extends Mage_Adminhtml_Bl
 		$form->setUseContainer(true);
 		$this->setForm($form);
 
-		if (Mage::getSingleton('adminhtml/session')->getFormData()) {
-			$data = Mage::getSingleton('adminhtml/session')->getFormData();
-			Mage::getSingleton('adminhtml/session')->setFormData(null);
+		if ($this->getSession()->getFormData()) {
+			$data = $this->getSession()->getFormData();
+			$this->getSession()->setFormData(null);
 		} elseif (Mage::registry('slider_item')) {
 			$data = Mage::registry('slider_item')->getData();
-			$data['bg_image'] = 'slider/' . $data['bg_image'];
+
+			if (false === (bool)$data['bg_image']) {
+				unset($data['bg_image']);
+			} else {
+				$data['bg_image'] =	'slider/' . $data['bg_image'];
+			}
 		}
 
 		$fieldset = $form->addFieldset('item_form',
@@ -39,7 +44,7 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit_Form extends Mage_Adminhtml_Bl
 		]);
 		$fieldset->addField('bg_image', 'image', [
 			'label' => $this->__('Add New Image'),
-			'required' => false,
+			'required' => true,
 			'name' => 'bg_image',
 		]);
 		$fieldset->addField('group_id', 'select', [
@@ -81,14 +86,18 @@ class Powerbody_Slider_Block_Adminhtml_Items_Edit_Form extends Mage_Adminhtml_Bl
 
 	private function getSelectOptions(): array
 	{
-		$selectOptions = ['-1' => $this->__('You can make choice...'),];
+		$selectOptions = ['' => $this->__(' -- Please select --'),];
+		/* @var Powerbody_Slider_Model_Mysql4_Group_Collection $collection */
 		$collection = Mage::getModel('powerbody_slider/group')->getCollection();
 		foreach ($collection as $model) {
-			$id = $model->getData('id');
-			$name = $model->getData('name');
-			$selectOptions[$id] = $name;
+			$selectOptions[$model->getData('id')] = $model->getData('name');
 		}
 
 		return $selectOptions;
+	}
+
+	protected function getSession() {
+
+		return Mage::getSingleton('adminhtml/session');
 	}
 }

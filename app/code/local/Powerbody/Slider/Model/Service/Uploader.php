@@ -2,47 +2,54 @@
 
 class Powerbody_Slider_Model_Service_Uploader
 {
-	public function saveSlidesItem($itemId, $data)
+	public function saveSlidesItem(?int $itemId, array $data): void
 	{
+		/* @var Powerbody_Slider_Model_Item $itemModel */
 		$itemModel = Mage::getModel('powerbody_slider/item');
 		try {
 			if (false === empty($itemId)) {
 				$itemModel->load($itemId);
 			}
+			$image = $this->getImageName();
 
-			$image = $this->_getImageName();
-			if (false !== $image) {
+			if (null !== $image) {
 				$image = $this->sanitize($image);
-				$data['bg_image'] = $this->_uploadImage($image);
+				$data['bg_image'] = $this->uploadImage($image);
 			}
+
+			//check if item is edited and delete 'slider/'-part of bg_image path
+			if (false === empty($data['bg_image']['value'])) {
+				$data['bg_image'] = substr($data['bg_image']['value'], 7);
+			}
+
 			$itemModel->addData($data);
 			$itemModel->save();
-			$success = $this->__('Slide Item was successfully saved.');
-			$this->_getSession()->addSuccess($success);
+			$success = Mage::helper('powerbody_slider')->__('Slide Item was successfully saved.');
+			$this->getSession()->addSuccess($success);
 		} catch (Exception $e) {
-			$error = $this->__('Error occurred during data saving.');
-			$this->_getSession()->addError($error);
+			$error = Mage::helper('powerbody_slider')->__('Error occurred during data saving.');
+			$this->getSession()->addError($error);
 			Mage::logException($e);
 		}
 	}
 
-	protected function _getImageName()
+	protected function getImageName(): ?string
 	{
 		if (true !== empty($_FILES['bg_image']['name'])) {
 			return $_FILES['bg_image']['name'];
 		} else {
-			return false;
+			return null;
 		}
 	}
 
-	protected function _getSession()
+	protected function getSession(): Mage_Adminhtml_Model_Session
 	{
 		return Mage::getModel('adminhtml/session');
 	}
 
-	protected function _uploadImage($image)
+	protected function uploadImage(string $image): string
 	{
-		/* @var $uploader Varien_File_Uploader */
+		/* @var Varien_File_Uploader $uploader */
 		$uploader = new Varien_File_Uploader('bg_image');
 		$uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
 		$uploader->save(Mage::getBaseDir('media') . '/slider/', $image);

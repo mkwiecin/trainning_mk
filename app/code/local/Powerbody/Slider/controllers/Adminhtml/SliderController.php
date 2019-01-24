@@ -17,26 +17,28 @@ class Powerbody_Slider_Adminhtml_SliderController extends Mage_Adminhtml_Control
 
 	public function editAction()
 	{
-		// 1. Get ID and create model
-		$id = $this->getRequest()->getParam('id');
-		$model = Mage::getModel('powerbody_slider/group');
+		// 1. Get ID and creating model
+		$groupId = $this->getRequest()->getParam('id');
+		/* @var Powerbody_Slider_Model_Group $groupModel */
+		$groupModel = Mage::getModel('powerbody_slider/group');
+
 		// 2. Initial checking
-		if ($id) {
-			$model->load($id);
-			if (!$model->getId()) {
-				Mage::getSingleton('adminhtml/session')->addError($this->__('This Slides Group no longer exists.'));
+		if (false === empty($groupId)) {
+			$groupModel->load($groupId);
+			if (true === empty($groupModel->getId())) {
+				$this->getSession()->addError($this->__('This Slides Group no longer exists.'));
 				$this->_redirect('*/*/');
 
 				return;
 			}
 		}
 		// 3. Set entered data if was error when we do save
-		$data = Mage::getSingleton('adminhtml/session')->getFormData(true);
-		if (!empty($data)) {
-			$model->setData($data);
+		$data = $this->getSession()->getFormData(true);
+		if (false === empty($data)) {
+			$groupModel->setData($data);
 		}
 		// 4. Register model to use later in blocks
-		Mage::register('slider_group', $model);
+		Mage::register('slider_group', $groupModel);
 		// 5. Build edit form
 		$this->_initAction()
 			->renderLayout();
@@ -46,34 +48,39 @@ class Powerbody_Slider_Adminhtml_SliderController extends Mage_Adminhtml_Control
 	{
 		// check if data sent
 		if ($data = $this->getRequest()->getPost()) {
-			$id = $this->getRequest()->getParam('id');
+			$groupId = $this->getRequest()->getParam('id');
+			/* @var Mage_Core_Model_Date $modelDate */
+			$modelDate = Mage::getModel('core/date')->date('Y-m-d');
 
-			if ($id) {
-				$data['id'] = $id;
+			if (true === isset($groupId)) {
+				$data['id'] = $groupId;
+				$data['updated_date'] = $modelDate;
+			} else {
+				$data['created_date'] = $modelDate;
 			}
-			$model = Mage::getModel('powerbody_slider/group')->load($id);
+			/* @var Powerbody_Slider_Model_Group */
+			$groupModel = Mage::getModel('powerbody_slider/group')->load($groupId);
 
-			if (!$model->getId() && $id) {
-				Mage::getSingleton('adminhtml/session')->addError($this->__('This Slides Group no longer exists.'));
+			if (true === empty($groupModel->getId()) && false === empty($groupId)) {
+				$this->getSession()->addError($this->__('This Slides Group no longer exists.'));
 				$this->_redirect('*/*/');
 
 				return;
 			}
 			// init model and set data
-			$model->setData($data);
-
+			$groupModel->setData($data);
 			// try to save it
 			try {
 				// save the data
-				$model->save();
+				$groupModel->save();
 				// display success message
-				Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The Slides Group has been saved.'));
+				$this->getSession()->addSuccess($this->__('The Slides Group has been saved.'));
 				// clear previously saved data from session
-				Mage::getSingleton('adminhtml/session')->setFormData(false);
+				$this->getSession()->setFormData(false);
 
 				// check if 'Save and Continue'
 				if ($this->getRequest()->getParam('back')) {
-					$this->_redirect('*/*/edit', ['id' => $model->getId()]);
+					$this->_redirect('*/*/edit', ['id' => $groupModel->getId()]);
 
 					return;
 				}
@@ -83,9 +90,9 @@ class Powerbody_Slider_Adminhtml_SliderController extends Mage_Adminhtml_Control
 				return;
 			} catch (Exception $e) {
 				// display error message
-				Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+				$this->getSession()->addError($e->getMessage());
 				// save data in session
-				Mage::getSingleton('adminhtml/session')->setFormData($data);
+				$this->getSession()->setFormData($data);
 				// redirect to edit form
 				$this->_redirect('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
 
@@ -99,15 +106,15 @@ class Powerbody_Slider_Adminhtml_SliderController extends Mage_Adminhtml_Control
 	public function deleteAction()
 	{
 		// check if we know what should be deleted
-		if ($id = $this->getRequest()->getParam('id')) {
+		if ($groupId = $this->getRequest()->getParam('id')) {
 			try {
 				// init model and delete
-				$model = Mage::getModel('powerbody_slider/group');
-				$model->load($id);
-				$name = $model->getName();
-				$model->delete();
+				/* @var Powerbody_Slider_Model_Group $groupModel */
+				$groupModel = Mage::getModel('powerbody_slider/group')->load($groupId);
+				$name = $groupModel->getName();
+				$groupModel->delete();
 				// display success message
-				Mage::getSingleton('adminhtml/session')->addSuccess($this->__("The Slides Group '%s' has been deleted.",
+				$this->getSession()->addSuccess($this->__("The Slides Group '%s' has been deleted.",
 					$name));
 				// go to grid
 				$this->_redirect('*/*/');
@@ -116,19 +123,20 @@ class Powerbody_Slider_Adminhtml_SliderController extends Mage_Adminhtml_Control
 
 			} catch (Exception $e) {
 				// display error message
-				Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+				$this->getSession()->addError($e->getMessage());
 				// go back to edit form
-				$this->_redirect('*/*/edit', ['id' => $id]);
+				$this->_redirect('*/*/edit', ['id' => $groupId]);
+
 				return;
 			}
 		}
 		// display error message
-		Mage::getSingleton('adminhtml/session')->addError($this->__('Unable to find a Slides Group to delete.'));
+		$this->getSession()->addError($this->__('Unable to find a Slides Group to delete.'));
 		// go to grid
 		$this->_redirect('*/*/');
 	}
 
-	protected function _initAction()
+	protected function _initAction(): Powerbody_Slider_Adminhtml_SliderController
 	{
 		$this->loadLayout();
 
@@ -138,5 +146,10 @@ class Powerbody_Slider_Adminhtml_SliderController extends Mage_Adminhtml_Control
 	protected function _isAllowed(): bool
 	{
 		return Mage::getSingleton('admin/session')->isAllowed('cms/sliders/groups');
+	}
+
+	protected function getSession(): Mage_Adminhtml_Model_Session
+	{
+		return Mage::getSingleton('adminhtml/session');
 	}
 }

@@ -11,11 +11,14 @@ class Powerbody_Slider_Block_Widget_Slider extends Mage_Core_Block_Template impl
     public function getBgImagesOfGroup(): array
     {
         $groupId = $this->getData('slider_list');
-        if (isset($groupId)) {
+        if (true === isset($groupId)) {
+        	/* @var Powerbody_Slider_Model_Mysql4_Item_Collection $itemsCollection */
             $itemsCollection = Mage::getModel('powerbody_slider/item')->getCollection();
             $itemsCollection->addFieldToFilter('group_id', ['eq' => $groupId]);
-            $itemsCollection->addFieldToFilter('display_from', ['lteq' => Mage::getModel('core/date')->date('Y-m-d')]);
-            $itemsCollection->addFieldToFilter('display_To', ['gteq' => Mage::getModel('core/date')->date('Y-m-d')]);
+	        /* @var  Mage_Core_Model_Date $dateModel */
+	        $dateModel = Mage::getModel('core/date');
+            $itemsCollection->addFieldToFilter('display_from', ['lteq' => $dateModel->date('Y-m-d')]);
+            $itemsCollection->addFieldToFilter('display_To', ['gteq' => $dateModel->date('Y-m-d')]);
             $itemsCollection->setOrder('sort_order', 'asc');
         }
         $bgImages = $itemsCollection->getColumnValues('bg_image');
