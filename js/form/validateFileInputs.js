@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var inputs = document.querySelectorAll('input');
 
     for (var i = 2; i < inputs.length; i++) {
-        var values = inputs[i].value;
+        var inputValue = inputs[i].value;
 
-        if (values) {
+        if ('' !== inputValue) {
 
             return;
         } else {
