@@ -19,7 +19,7 @@
         <reference name="head">
             <action method="addItem">
                 <type>js</type>
-                <name>form/validateFileInput.js</name>
+                <name>form/validateFileInputs.js</name>
             </action>
         </reference>
         <reference name="content">

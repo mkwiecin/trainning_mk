@@ -1,13 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var titleInputValue = document.getElementById('title').value;
+    var inputs = document.querySelectorAll('input');
 
-    //check if form is rendered in 'new' or 'edit' mode with title field which is required one. If mode is 'new', then adds 'required-entry' class to file-input.
-    if ('' === titleInputValue) {
-        var fileInput = document.querySelector('.input-file');
-        var fileInputLabel = fileInput.parentElement.previousElementSibling.firstChild;
+    for (var i = 2; i < inputs.length; i++) {
+        var values = inputs[i].value;
 
-        if (fileInputLabel.getAttribute('for') === fileInput.getAttribute('id')) {
-            fileInput.classList.add('required-entry');
+        if (values) {
+
+            return;
+        } else {
+
+            if ('file' === inputs[i].getAttribute('type')) {
+                var fileInput = document.getElementById(inputs[i].getAttribute('id'));
+                var fileInputLabel = fileInput.parentElement.previousElementSibling.firstChild;
+
+                if (fileInputLabel.getAttribute('for') === fileInput.getAttribute('id') && fileInputLabel.querySelector('.required')) {
+                    fileInput.classList.add('required-entry');
+                }
+            }
         }
     }
 });
